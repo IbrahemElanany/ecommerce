@@ -39,7 +39,7 @@
 
                     <div class="card-body">
 
-                        {!! Form::open(['method'=>'POST','action'=>'SiteSettingController@store']) !!}
+                        {!! Form::open(['method'=>'POST','action'=>'SiteSettingController@store','files'=>true]) !!}
 
                             {{csrf_field()}}
 
@@ -47,15 +47,23 @@
 
                                     <div class="form-group row{{ $errors->has('name') ? ' is-invalid' : '' }}">
 
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             {{$setting->slug}}
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
 
                                             @if($setting->type == 0)
 
                                                 {!! Form::text($setting->namesetting , $setting->value ,['class'=>'form-control','required','autofocus','placeholder'=>'إسم الإعدادات']) !!}
 
+                                            @elseif($setting->type == 3)
+                                                @if($setting->value != '')
+                                                    <img src="{{checkIfImageIsexist($setting->value , '/public/website/slider/' , '/website/slider/')}}" alt="صورة السليدر" width="150">
+
+                                                @endif
+                                            {{$setting->value}}
+                                                    <br><br>
+                                                    {!! Form::file($setting->namesetting , null ,['class'=>'form-control','required','autofocus','placeholder'=>'صورة السليدر الرئيسي']) !!}
                                             @else
 
                                                 {!! Form::textarea($setting->namesetting , $setting->value ,['class'=>'form-control','required','autofocus','placeholder'=>'إسم الإعدادات']) !!}

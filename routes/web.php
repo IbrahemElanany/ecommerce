@@ -64,7 +64,23 @@ Route::group(['middleware'=>['web','admin']],function (){
 
     Route::get('/type/{type}', 'BuController@showByType');
 
-    Route::post('/search', 'BuController@search');
+    Route::get('/search', 'BuController@search');
+
+    Route::get('/SingleBuilding/{id}', 'BuController@showsingle');
+
+    Route::get('/ajax/bu/information', 'BuController@getAjaxInfo');
+
+    #Contact
+
+    Route::get('/contact', 'HomeController@contact');
+
+    Route::post('/contact', 'ContactController@store');
+
+    Route::resource('/adminpanel/contact', 'ContactController');
+
+    Route::get('/adminpanel/contact', 'ContactController@index');
+
+    Route::get('/adminpanel/contact/{id}/delete', 'ContactController@destroy');
 
 
 

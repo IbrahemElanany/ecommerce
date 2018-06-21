@@ -50,6 +50,7 @@ body a {
 	margin-left: 0;
 }
 .menu li a {
+	font-family: 'Droid Arabic Kufi', serif;
 	display: block;
 	font-size: 1em;
 	color: #777;
@@ -167,11 +168,12 @@ body a {
 }
 .banner-info h1 {
 	font-size: 3em;
-	color: #eee;
+	color: #000000;
 	line-height: 1.4em;
 	margin: 0em;
 	font-weight: 500;
 }
+
 .banner-info p {
 	color: #ddd;
 	font-size: 1.2em;

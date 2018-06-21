@@ -41,11 +41,13 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ url('/adminpanel/bu') }}">
 
-                            @include('admin.bu.form')
+                        {!! Form::open(['method'=>'POST','url'=>'/adminpanel/bu','files'=>true]) !!}
 
-                        </form>
+
+                        @include('admin.bu.form')
+
+                        {!! Form::close() !!}
 
                     </div>
                 </div>

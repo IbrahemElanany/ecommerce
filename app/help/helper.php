@@ -5,6 +5,48 @@ function getSetting($settingname = 'sitename'){
     return \App\SiteSetting::where('namesetting' , $settingname)->get()[0]->value;
 }
 
+function checkIfImageIsexist($imageName , $imagepath = '/public/website/bu_images/' , $url = '/website/bu_images/'){
+
+    if ($imageName != ''){
+
+        $path = base_path().$imagepath.$imageName;
+
+        if(file_exists($path)){
+            return \Illuminate\Support\Facades\Request::root().$url.$imageName;
+        }
+    }
+        return getSetting('no_image');
+
+}
+function uploadImage($request , $path = '/public/website/bu_images/' , $width = '500' , $height = '362',$daleteFileWithName =''){
+
+    $dim = getimagesize($request);
+//    if($dim[0] > $width || $dim[1] > $height){
+//        return false;
+//    }
+    $fileName = $request->getClientOriginalName();
+    $request->move(base_path().$path,$fileName);
+    if($width = '500' && $height = '362'){
+        $thumbpath = base_path().'/public/website/thumb/';
+        $thumbpathNew = $thumbpath.$fileName;
+        \Intervention\Image\Facades\Image::make(base_path().$path.'/'.$fileName)->resize('500','362')->save($thumbpathNew,100);
+        if($daleteFileWithName !=''){
+            deleteImage($thumbpath.'/'.$daleteFileWithName);
+        }
+    }
+    if($daleteFileWithName !=''){
+        deleteImage(base_path().$path.'/'.$daleteFileWithName);
+    }
+    return $fileName;
+}
+
+function deleteImage($daleteFileWithName){
+    if(file_exists($daleteFileWithName)){
+        \Illuminate\Support\Facades\File::delete($daleteFileWithName);
+    }
+}
+
+
 function bu_type(){
     $array = [
         'شقة',
@@ -49,6 +91,15 @@ function searchField(){
         'bu_status' => ' حالة العقار ',
         'bu_price_from' => ' سعر العقار من ',
         'bu_price_to' => ' سعر العقار إلي ',
+    ];
+}
+
+function contact(){
+    return [
+        '1' => 'إعجاب',
+        '2' => 'مشكلة',
+        '3' => 'إقتراح',
+        '4' => 'إستفسار',
     ];
 }
 

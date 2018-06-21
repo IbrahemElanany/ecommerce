@@ -1,0 +1,27 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+*{
+    font-family: 'Droid Arabic Kufi', serif;
+}
+select .form-control{
+    padding: 1px 12px;
+}
+.select2{
+    font-size: 80%;
+}
+
+h1{
+    font-size: 25px;
+}
+
+h2{
+    font-size: 17px;
+}
+
+.breadcrumb-item{
+    font-size: 15px;
+}
+
+.bu_detail{
+    font-size: 12px;
+}

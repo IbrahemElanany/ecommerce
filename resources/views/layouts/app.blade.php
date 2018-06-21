@@ -25,6 +25,7 @@
         @yield('title')
     </title>
 
+
     @yield('header')
 
     <!-- Scripts -->
@@ -33,6 +34,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+{!! Html::style('cus/css/fonts.css') !!}
 
     <!-- Styles -->
 
@@ -50,9 +52,42 @@
                     <ul class="nav" id="nav">
                         <li class="current"><a href="{{url('/home')}}"> الرئيسية </a></li>
                         <li><a href="{{url('/showAllBuilding')}}"> كل العقارات </a></li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                 إيجار <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach(bu_type() as $keyType=>$type)
+                                    <li style="width: 100%">
+                                        <a class="dropdown-item" href="{{ url('/search?bu_rent=1&bu_type='.$keyType) }}">
+                                            {{$type}}
+                                        </a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                   تمليك    <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach(bu_type() as $keyType=>$type)
+                                    <li style="width: 100%">
+                                        <a class="dropdown-item" href="{{ url('/search?bu_rent=0&bu_type='.$keyType) }}">
+                                            {{$type}}
+                                        </a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+                        </li>
+
                         <li><a href="about.html"> من نحن </a></li>
                         <li><a href="services.html"> خدماتنا </a></li>
-                        <li><a href="contact.html"> اتصل بنا </a></li>
+                        <li><a href="{{url('/contact')}}"> اتصل بنا </a></li>
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('تسجيل الدخول') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('إضافة عضو') }}</a></li>
@@ -62,17 +97,19 @@
                                     {{ Auth::user()->name }}<span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('تسجيل خروج') }}
-                                    </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('تسجيل خروج') }}
+                                        </a>
+                                    </li>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
+                                </ul>
                             </li>
                         @endguest
                         <div class="clear"></div>

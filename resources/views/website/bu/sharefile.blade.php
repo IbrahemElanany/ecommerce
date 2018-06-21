@@ -12,11 +12,13 @@
                 <article class="col-item">
                     <div class="photo">
                         <div class="options-cart-round">
-                            <button class="btn btn-default" title="أظهر التفاصيل">
-                                <span class="fa fa-shopping-cart"></span>
-                            </button>
+                            <a href="{{url('/SingleBuilding/'.$bu->id)}}">
+                                <button class="btn btn-default" title="أظهر التفاصيل">
+                                    <span class="fa fa-shopping-cart"></span>
+                                </button>
+                            </a>
                         </div>
-                        <a href="#"> <img src="../../website/images/pic1.PNG" class="img-responsive" alt="Product Image" /> </a>
+                        <a href="#"> <img src="{{checkIfImageIsexist($bu->image,'/public/website/thumb/','/website/thumb/')}}" class="img-responsive" alt="Product Image" /> </a>
                     </div>
                     <div class="info">
                         <div class="row">

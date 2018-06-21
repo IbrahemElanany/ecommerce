@@ -41,7 +41,16 @@ class SiteSettingController extends Controller
         //
         foreach (array_except($request->toArray(),['_token','submit']) as $key=>$req){
             $siteSettingUpdate = $siteSetting->where('namesetting',$key)->get()[0];
-            $siteSettingUpdate->fill(['value'=>$req])->save();
+            if ($siteSettingUpdate->type != 3){
+                $siteSettingUpdate->fill(['value'=>$req])->save();
+            }else{
+                $fileName = uploadImage($req,'/public/website/slider/','1700','600',$siteSettingUpdate->value);
+                if ($fileName){
+                    $siteSettingUpdate->fill(['value'=>$fileName])->save();
+                }elseif (!$fileName){
+                    return redirect()->back()->withFlashMessage('إختر صورة أقل من 1700 * 600');
+                }
+            }
         }
 
         return redirect()->back()->withFlashMessage('تم تغيير إعدادات الموقع بنجاح');

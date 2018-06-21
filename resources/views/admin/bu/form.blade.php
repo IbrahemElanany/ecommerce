@@ -145,6 +145,29 @@
         </div>
     </div>
 
+    <div class="form-group row{{ $errors->has('image') ? ' is-invalid' : '' }}">
+
+        <label class="col-md-2" for="image"> صورة للعقار </label>
+        <div class="col-md-10">
+
+            @if(isset($bu))
+                @if($bu->image != '')
+                    <img src="{{\Illuminate\Support\Facades\Request::root().'/website/bu_images/'.$bu->image}}" width="100px" alt="صورة العقار">
+                    <div class="clearfix"></div>
+                    <br>
+                @endif    
+            @endif    
+
+            {!! Form::file('image',null,['class'=>'form-control']) !!}
+
+            @if ($errors->has('image'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('image') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
     <div class="form-group row{{ $errors->has('bu_langtuide') ? ' is-invalid' : '' }}">
 
         <label class="col-md-2" for="bu_langtuide">خط الطول</label>

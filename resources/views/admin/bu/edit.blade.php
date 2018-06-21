@@ -57,7 +57,7 @@
                     <div class="card-body">
 
 
-                        {!! Form::model($bu,['method'=>'PATCH','action'=>['BuController@update',$bu->id]]) !!}
+                        {!! Form::model($bu,['method'=>'PATCH','action'=>['BuController@update',$bu->id],'files'=>true]) !!}
 
                             @include('admin.bu.form')
 

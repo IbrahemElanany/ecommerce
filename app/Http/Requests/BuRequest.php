@@ -36,7 +36,8 @@ class BuRequest extends FormRequest
             'bu_latitude'=>'required',
             'bu_large_des'=>'required|min:5',
             'bu_status'=>'required|integer',
-            'bu_rooms'=>'required|integer'
+            'bu_rooms'=>'required|integer',
+            'image'=>'required|mimes:png,jpg,jpeg'
         ];
     }
 }

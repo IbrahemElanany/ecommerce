@@ -23,6 +23,7 @@ class Bu extends Model
         'bu_status',
         'user_id',
         'bu_rooms',
-        'bu_place'
+        'bu_place',
+        'image',
     ];
 }
